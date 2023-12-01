@@ -7,6 +7,7 @@ import kotlin.io.path.readLines
  * Reads lines from the given input txt file.
  */
 fun readInput(name: String) = Path("src/$name.txt").readLines()
+fun readAOCInputDataTable(name: String) = AOCInputDataTable(Path("src/$name.txt").readLines())
 
 /**
  * Converts string to md5 hash.

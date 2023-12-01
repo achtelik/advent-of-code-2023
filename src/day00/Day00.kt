@@ -2,7 +2,6 @@ package day00
 
 import println
 import readInput
-import toIntWithWords
 
 fun main() {
     fun part1(input: List<String>) {
