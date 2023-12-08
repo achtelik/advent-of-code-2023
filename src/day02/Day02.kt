@@ -58,7 +58,7 @@ fun main() {
     }
 
     //"Result Test 1 = ${part1(readInput("day02/Day02_1_test1"))}".println()
-    //"Result Part 1 = ${part1(readInput("day02/Day02_1"))}".println()
+    "Result Part 1 = ${part1(readInput("day02/Day02_1"))}".println()
 
     //"Result Test 2 = ${part2(readInput("day02/Day02_2_test1"))}".println()
     "Result Part 2 = ${part2(readInput("day02/Day02_2"))}".println()
