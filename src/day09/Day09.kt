@@ -5,15 +5,14 @@ import readInput
 
 fun main() {
     val day = "09"
-    //"Result Test 1 = ${Day08Solution.solve1(readInput("day$day/1_test1"))}".println()
-    //"Result Test 1 = ${Day08Solution.solve1(readInput("day$day/1_test2"))}".println()
-    //"Result Part 1 = ${Day08Solution.solve1(readInput("day$day/1"))}".println()
+    //"Result Test 1 = ${Day09Solution.solve1(readInput("day$day/1_test1"))}".println()
+    //"Result Part 1 = ${Day09Solution.solve1(readInput("day$day/1"))}".println()
 
-    //"Result Test 2 = ${Day08Solution.solve2(readInput("day$day/2_test1"))}".println()
-    "Result Part 2 = ${Day08Solution.solve2(readInput("day$day/2"))}".println()
+    //"Result Test 2 = ${Day09Solution.solve2(readInput("day$day/2_test1"))}".println()
+    "Result Part 2 = ${Day09Solution.solve2(readInput("day$day/2"))}".println()
 }
 
-class Day08Solution {
+class Day09Solution {
     companion object {
         fun solve1(input: List<String>): Long {
             val result = input.map { inputLine ->
