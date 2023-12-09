@@ -26,3 +26,8 @@ You can solve the puzzle and provide an answer using the language of your choice
 * jetbrains: https://blog.jetbrains.com/kotlin/2023/11/advent-of-code-2023-with-kotlin/
 * jetbrains solutions: https://www.youtube.com/watch?v=AoQw4t8Cb94&list=PLlFc5cFwUnmzk0wvYW4aTl57F2VNkFisU
 * StackIt Leaderboard: https://advent.apps.01.cf.eu01.stackit.cloud/
+
+# Conclusion
+
+* Day 5 was a memory and performance issue.
+* Day 8 was a pain, because you had to understand the structure of the data. Otherwise you get performance issues.
