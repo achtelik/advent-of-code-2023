@@ -3,6 +3,8 @@ package day09
 import println
 import readInput
 import utils.convetListOfList
+import java.awt.Polygon
+
 
 fun main() {
     val day = "10"
@@ -12,12 +14,12 @@ fun main() {
     //"Result Test 1-4 = ${Day10Solution().solve1(readInput("day$day/1_test4"))}".println()
     //"Result Part 1 = ${Day10Solution().solve1(readInput("day$day/1"))}".println()
 
-    //"Result Test 2-0= ${Day10Solution().solve2(readInput("day$day/2_test0"))}".println() // 2
-    //"Result Test 2-1 = ${Day10Solution().solve2(readInput("day$day/2_test1"))}".println() // 4
+    "Result Test 2-0= ${Day10Solution().solve2(readInput("day$day/2_test0"))}".println() // 2
+    "Result Test 2-1 = ${Day10Solution().solve2(readInput("day$day/2_test1"))}".println() // 4
     "Result Test 2-2 = ${Day10Solution().solve2(readInput("day$day/2_test2"))}".println() // 8
-    //"Result Test 2-3 = ${Day10Solution().solve2(readInput("day$day/2_test3"))}".println() // 8
-    //"Result Test 2-4 = ${Day10Solution().solve2(readInput("day$day/2_test4"))}".println() // 4
-    //"Result Part 2 = ${Day10Solution().solve2(readInput("day$day/2"))}".println()
+    "Result Test 2-3 = ${Day10Solution().solve2(readInput("day$day/2_test3"))}".println() // 8
+    "Result Test 2-4 = ${Day10Solution().solve2(readInput("day$day/2_test4"))}".println() // 4
+    "Result Part 2 = ${Day10Solution().solve2(readInput("day$day/2"))}".println()
 }
 
 class Day10Solution {
@@ -111,37 +113,26 @@ class Day10Solution {
 
     fun findInsides(route: List<Pair<Int, Int>>, field: List<List<String>>): List<Pair<Int, Int>> {
         var insideCells = mutableListOf<Pair<Int, Int>>()
+        val polygon = drawCanvas(route, field)
         for (yPosition in field.indices) {
             for (xPosition in field[0].indices) {
-                if (!route.contains(Pair(yPosition, xPosition))) {
-                    var lastRelevantSymbol = ""
-                    val intersections = mutableSetOf<Pair<Int, Int>>()
-                    for (tmpXPosition in 0..xPosition) {
-                        when {
-                            !route.contains(Pair(yPosition, tmpXPosition - 1)) && route.contains(
-                                Pair(yPosition, tmpXPosition)
-                            ) -> {
-                                intersections.add(Pair(yPosition, tmpXPosition))
-                            }
-
-                            route.contains(Pair(yPosition, tmpXPosition - 1)) &&
-                                    !intersections.contains(Pair(yPosition, tmpXPosition - 1))
-                                    && !route.contains(
-                                Pair(yPosition, tmpXPosition)
-                            ) -> {
-                                intersections.add(Pair(yPosition, tmpXPosition))
-                            }
-                        }
-                    }
-                    if (intersections.isNotEmpty() && intersections.count() % 2 != 0) insideCells.add(
-                        Pair(
-                            yPosition,
-                            xPosition
-                        )
-                    )
+                if (!route.contains(Pair(yPosition, xPosition)) && polygon.contains(xPosition, yPosition)) {
+                    insideCells.add(Pair(yPosition, xPosition))
                 }
             }
         }
         return insideCells
+    }
+
+    fun drawCanvas(route: List<Pair<Int, Int>>, field: List<List<String>>): Polygon {
+        //val canvas = Canvas()
+        //canvas.setSize(field[0].size, field.size)
+        val polygon = Polygon()
+        route.forEach {
+            polygon.addPoint(it.second, it.first)
+        }
+        //canvas.graphics.fillPolygon(polygon)
+
+        return polygon
     }
 }

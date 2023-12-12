@@ -31,3 +31,4 @@ You can solve the puzzle and provide an answer using the language of your choice
 
 * Day 5 was a memory and performance issue.
 * Day 8 was a pain, because you had to understand the structure of the data. Otherwise you get performance issues.
+* Day 10 was not solvable for me :( I used java.awt.Polygon to check if the point is inside. :)
