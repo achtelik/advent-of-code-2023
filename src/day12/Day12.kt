@@ -1,5 +1,6 @@
 package day12
 
+import kotlinx.coroutines.*
 import println
 import readInput
 import java.lang.Exception
@@ -7,11 +8,13 @@ import java.lang.Exception
 
 fun main() {
     val day = "12"
-    //"Result Test 1-1 = ${Day12Solution1().solve(readInput("day$day/1_test1"))}".println()
-    //"Result Part 1 = ${Day12Solution1().solve(readInput("day$day/1"))}".println()
+    runBlocking(Dispatchers.Default) {
+        //"Result Test 1-1 = ${Day12Solution1().solve(readInput("day$day/1_test1"))}".println()
+        //"Result Part 1 = ${Day12Solution1().solve(readInput("day$day/1"))}".println()
 
-    "Result Test 2-1 = ${Day12Solution2().solve(readInput("day$day/2_test1"))}".println() // 4
-    //"Result Part 2 = ${Day12Solution2().solve(readInput("day$day/2"))}".println()
+        "Result Test 2-1 = ${Day12Solution2().solve(readInput("day$day/2_test1"))}".println() // 4
+        //"Result Part 2 = ${Day12Solution2().solve(readInput("day$day/2"))}".println()
+    }
 }
 
 class Day12Solution1 {
@@ -61,17 +64,24 @@ class Day12Solution2 {
 
     data class Input(val input: String, val validation: String, val possibilities: List<String>)
 
-    fun solve(input: List<String>): Long {
+    suspend fun solve(input: List<String>): Long {
         val inputData = createInput(input)
         return inputData.sumOf { it.possibilities.size }.toLong()
     }
 
-    fun createInput(input: List<String>): List<Input> {
-        return input.parallelStream().map {
-            val data = it.split(" ")[0].repeat(5, "?")
-            val validation = it.split(" ")[1].repeat(5, ",")
-            Input(data, validation, replaceQuestionMark(data, validation))
-        }.toList()
+    suspend fun createInput(input: List<String>): List<Input> {
+        return coroutineScope {
+            input.map {
+                async {
+                    val data = it.split(" ")[0].repeat(3, "?")
+                    val validation = it.split(" ")[1].repeat(3, ",")
+                    println("Processing: $data")
+                    val result = Input(data, validation, replaceQuestionMark(data, validation))
+                    println("Processed: $data")
+                    result
+                }
+            }.awaitAll()
+        }
     }
 
     fun replaceQuestionMark(input: String, validation: String): List<String> {
